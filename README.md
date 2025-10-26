@@ -1,6 +1,6 @@
 # LinkedinSafetyPageSkip
 
-This userscript skips the safety page and immediately redirects to the target URL:
+This script skips the security page and immediately redirects when you click on an external link:
 ![Safety page](img/image.png)
 
 ## Installing

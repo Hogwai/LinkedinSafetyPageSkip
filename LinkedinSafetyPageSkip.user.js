@@ -1,29 +1,71 @@
 // ==UserScript==
 // @name            Linkedin Safety Page Skip
 // @namespace       https://github.com/Hogwai/LinkedinSafetyPageBypass/
-// @version         1.0.0
+// @version         1.0.1
 // @description:en  Skip the security page when you click on an external link
 // @description:fr  Ignore la page de sécurité lorsque vous cliquez sur un lien externe
 // @author          Hogwai
 // @include         *://*.linkedin.*/safety/*
+// @include         *://lnkd.in/*
 // @grant           none
 // @license         MIT
 // @run-at          document-start
-// @description     Skip the security page when you click on an external link
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
     const fullSafetyUrl = window.location.href;
     const urlObj = new URL(fullSafetyUrl);
     const paramUrl = urlObj.searchParams.get("url");
-    const cleanUrl = paramUrl ? decodeURIComponent(paramUrl) : null;
+    let redirectUrl = null;
 
-    if (cleanUrl && cleanUrl.trim() !== "") {
-        console.log(`Redirecting to: ${cleanUrl}`);
-        window.location.href = cleanUrl;
-    } else {
-        console.log("No redirection: the URL is null or blank.");
+    if (paramUrl) {
+        redirectUrl = decodeURIComponent(paramUrl).trim();
+        if (redirectUrl) {
+            console.log("[LSPS] Redirect to ", redirectUrl);
+            redirectToUrl(redirectUrl);
+            return;
+        }
     }
+
+    function findAndRedirect() {
+        const lien = document.querySelector('a[data-tracking-control-name="external_url_click"]');
+        if (lien?.href) {
+            const href = lien.href.trim();
+            if (href) {
+                console.log("[LSPS] Redirect to ", href);
+                redirectToUrl(href);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    if (document.readyState !== 'loading') {
+        if (findAndRedirect()) return;
+    }
+
+    const observer = new MutationObserver(() => {
+        if (findAndRedirect()) {
+            observer.disconnect();
+        }
+    });
+
+    if (document.documentElement) {
+        observer.observe(document.documentElement, { childList: true, subtree: true });
+    } else {
+        document.addEventListener('DOMContentLoaded', () => {
+            observer.observe(document.documentElement, { childList: true, subtree: true });
+        });
+    }
+
+    function redirectToUrl(url) {
+        if (url === window.location.href) {
+            console.warn("[LSPS] Same URLs, no redirection.");
+            return;
+        }
+        window.location.href = url;
+    }
+
 })();

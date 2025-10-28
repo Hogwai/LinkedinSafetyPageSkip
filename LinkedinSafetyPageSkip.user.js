@@ -30,9 +30,9 @@
     }
 
     function findAndRedirect() {
-        const lien = document.querySelector('a[data-tracking-control-name="external_url_click"]');
-        if (lien?.href) {
-            const href = lien.href.trim();
+        const externalUrl = document.querySelector('a[data-tracking-control-name="external_url_click"]');
+        if (externalUrl?.href) {
+            const href = externalUrl.href.trim();
             if (href) {
                 console.log("[LSPS] Redirect to ", href);
                 redirectToUrl(href);

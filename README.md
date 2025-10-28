@@ -1,6 +1,6 @@
 # LinkedinSafetyPageSkip
 
-This userscript skips the safety page and immediately redirects to the target URL:
+This script skips the security page and immediately redirects when you click on an external link:
 ![Safety page](img/image.png)
 
 ## Installing
@@ -14,7 +14,7 @@ This userscript skips the safety page and immediately redirects to the target UR
 
 #### Installing Tampermonkey
 
-- **Google Chrome**: Go to the [Chrome Web Store](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?pli=1) and click "Add to Chrome".
+- **Google Chrome**: Go to the [Chrome Web Store](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo) and click "Add to Chrome".
 - **Firefox**: Go to [Mozilla Add-ons](https://addons.mozilla.org/fr/firefox/addon/tampermonkey/) and click "Add to Firefox".
 - **Other browsers**: Search for "Tampermonkey" in your browser's extension store (Edge, Opera, etc.).
 
@@ -22,7 +22,7 @@ This userscript skips the safety page and immediately redirects to the target UR
 
 1. **From Greasyfork:**
 
-- Go to the script page: [LinkedinSafetyPageSkip](https://greasyfork.org/fr/scripts/546877-linkedinsponsorblock)
+- Go to the script page: [LinkedinSafetyPageSkip](https://greasyfork.org/fr/scripts/553715-linkedin-safety-page-skip)
 - Click "Install this script" and confirm
 
 2. **From Github:**
